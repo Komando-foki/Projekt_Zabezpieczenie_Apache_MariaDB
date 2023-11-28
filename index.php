@@ -35,7 +35,7 @@
 <?php
 	if(isset($_SESSION['blad']))	
 	{
-		//echo $_SESSION['blad'];
+		echo $_SESSION['blad'];
 	}
 ?>
 
