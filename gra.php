@@ -29,12 +29,11 @@
 	echo "<p><b>E-mail</b>: ".$_SESSION['email'];
 	echo "<br /><b>data wygasniecia</b>: ".$_SESSION['dnipremium']."</p>";
 	
-	
-	
 	$dataczas=new DateTime('2023-05-12 08:00:00');
 	echo "Data i czas serwera:".$dataczas->format('Y-m-d H:i:s')."<br/>";
 	$czas_do_konca=DateTime::createFromFormat('Y-m-d H:i:s',$_SESSION['dnipremium']);
 	$roznica=$dataczas->diff($czas_do_konca);
+	
 	/*
 	echo time()."<br/>";
 echo date('Y-m-d H:i:s')."<br/>";

@@ -1,43 +1,4 @@
-<?php
-    //ob_start();
-    
-    if(!$_COOKIE['naszastrona']=="1")
-    {
-        $plik="licz.txt";
-        
-        //odczytujemy aktualną wartość z pliku
-        $file=fopen($plik, "r");
-        flock($file, 1);
-        $liczba=fgets($file, 16);
-        flock($file, 3);
-        fclose($file);
-        $liczba++; //zwiększamy o 1
-        
-        //zapisujemy nową wartość licznika
-        $file=fopen($plik, "w");
-        flock($file, 2);
-        fwrite($file, $liczba++);
-        flock($file, 3);
-        fclose($file); 
-        
-        setcookie("naszastrona","1");
-        //ob_end_flush();
-    }
 
-
-	session_start();
-	
-	if (!isset($_SESSION['udanarejestracja']))
-	{
-		header('Location: index.php');
-		exit();
-	}
-	else
-	{
-		unset($_SESSION['udanarejestracja']);
-	}
-
-?>
 
 <!DOCTYPE HTML>
 <html lang="pl">
@@ -48,7 +9,7 @@
 </head>
 
 <body>
-<?php include ('licz.txt'); ?>
+
 	Tylko martwi ujrzeli koniec wojny - Platon<br /><br />
 	Dziekujemy za rejestracje<br /><br />
 	<a href="index.php">zaloguj sie na konto!</a>
