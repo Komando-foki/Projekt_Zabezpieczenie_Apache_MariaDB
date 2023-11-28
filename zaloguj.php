@@ -26,20 +26,22 @@ try
 		$haslo = $_POST['haslo'];
 		
 		$login = htmlentities($login, ENT_QUOTES, "UTF-8");
-		
+		$haslo = htmlentities($haslo, ENT_QUOTES, "UTF-8");
 	
 		if ($rezultat = @$polaczenie->query(
-		sprintf("SELECT * FROM uzytkownicy WHERE user='%s'",
-		mysqli_real_escape_string($polaczenie,$login))))
+		sprintf("SELECT * FROM uzytkownicy WHERE user='%s' AND pass='%s'",
+		mysqli_real_escape_string($polaczenie,$login),
+		mysqli_real_escape_string($polaczenie,$haslo))))
 		
 		{
 			$ilu_userow = $rezultat->num_rows;
 			if($ilu_userow>0)
-			{
+			{	
+				$_SESSION['zalogowany'] = true;
+
 				$wiersz = $rezultat->fetch_assoc();
-				if(password_verify($haslo, $wiersz['pass']))
-				{
-					$_SESSION['zalogowany'] = true;
+				
+					
 					$_SESSION['id'] = $wiersz['id'];
 					$_SESSION['user'] = $wiersz['user'];
 					$_SESSION['drewno'] = $wiersz['drewno'];
@@ -66,7 +68,7 @@ try
 		}
 				$polaczenie->close();
 	}
-}
+
 catch(Exception $q)
 {
 	echo 'inf developerska'.$q;
