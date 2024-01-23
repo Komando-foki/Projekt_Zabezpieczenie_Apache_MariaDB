@@ -25,19 +25,26 @@ try
 		
 		$login = $_POST['login'];
 		$haslo = $_POST['haslo'];
-		
-		$login = htmlentities($login, ENT_QUOTES, "UTF-8");
-		$haslo = htmlentities($haslo, ENT_QUOTES, "UTF-8");
-	
-		if ($rezultat = @$polaczenie->query(
-		sprintf("SELECT * FROM uzytkownicy WHERE user='%s' AND pass='%s'",
-		mysqli_real_escape_string($polaczenie,$login),
-		mysqli_real_escape_string($polaczenie,$haslo))))
-		
-		{
+		$SQLsaftyoff = isset($_POST['SQLSafe']);
+
+		if($SQLsaftyoff){
+			$query_input = sprintf("SELECT * FROM uzytkownicy WHERE user='%s' AND pass='%s'", $login, $haslo);
+			$rezultat = @$polaczenie->query($query_input);
+		}
+		else{
+			$login = htmlentities($login, ENT_QUOTES, "UTF-8");
+			$haslo = htmlentities($haslo, ENT_QUOTES, "UTF-8");
+			$rezultat = @$polaczenie->query(sprintf("SELECT * FROM uzytkownicy WHERE user='%s' AND pass='%s'",
+			mysqli_real_escape_string($polaczenie,$login),
+			mysqli_real_escape_string($polaczenie,$haslo)));
+		}
+
+
+		if ($rezultat){
 			$ilu_userow = $rezultat->num_rows;
-			if($ilu_userow>0)
+			if($ilu_userow == 1)
 			{	
+
 				$_SESSION['zalogowany'] = true;
 
 				$wiersz = $rezultat->fetch_assoc();
@@ -55,17 +62,25 @@ try
 					$rezultat->free_result();
 					header('Location: gra.php');
 				}
+				elseif($SQLsaftyoff){
+					echo "</br>";
+					while ($row = $rezultat->fetch_assoc()) {
+						printf("%s (%s)\n", $row["user"], $row["pass"]);
+						echo "</br>";
+					}
+				} 
 				else 
 				{
 				$_SESSION['blad'] = '<span style="color:red">Nieprawidlowy login !</span>';
 				header('Location: index.php');
 				}
-			} 
+			}
 			else 
 			{
 				$_SESSION['blad'] = '<span style="color:red">Nieprawidlowe hasło!</span>';
 				header('Location: index.php');	
 			}
+
 		}
 				$polaczenie->close();
 	}
