@@ -26,6 +26,9 @@ SET time_zone = "+00:00";
 -- Struktura tabeli dla tabeli `uzytkownicy`
 --
 
+CREATE DATABASE IF NOT EXISTS osadnicy;
+USE osadnicy;
+
 CREATE TABLE IF NOT EXISTS `uzytkownicy` (
 `id` int(11) NOT NULL,
   `user` text COLLATE utf8_polish_ci NOT NULL,
