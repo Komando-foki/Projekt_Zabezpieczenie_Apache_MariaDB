@@ -9,6 +9,7 @@
 	}
 
 require_once "connect.php";
+require_once "blokada.php";
 mysqli_report(MYSQLI_REPORT_STRICT);
 
 try
@@ -56,13 +57,13 @@ try
 				}
 				else 
 				{
-				$_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login !</span>';
+				$_SESSION['blad'] = '<span style="color:red">Nieprawidlowy login !</span>';
 				header('Location: index.php');
 				}
 			} 
 			else 
 			{
-				$_SESSION['blad'] = '<span style="color:red">Nieprawidłowe hasło!</span>';
+				$_SESSION['blad'] = '<span style="color:red">Nieprawidlowe hasło!</span>';
 				header('Location: index.php');	
 			}
 		}
