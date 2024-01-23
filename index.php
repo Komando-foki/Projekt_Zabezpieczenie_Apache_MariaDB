@@ -33,9 +33,10 @@
 	</form>
 	
 <?php
+echo $ip = ip2long($_SERVER['REMOTE_ADDR']);
 	if(isset($_SESSION['blad']))	
 	{
-		echo $_SESSION['blad'];
+		 echo $_SESSION['blad'];
 	}
 ?>
 
