@@ -1,46 +1,45 @@
 <?php
 // Ustawienia bazy danych
-$sql_serwer = "localhost";
-$sql_login = "root";
-$sql_haslo = "";
-$sql_baza = "blokada";
 
 // Połączenie z bazą danych (używając MySQLi)
-$mysqli = new mysqli($sql_serwer, $sql_login, $sql_haslo, $sql_baza);
+function czyZablokowac()
+{
+    $sql_serwer = "localhost";
+    $sql_login = "root";
+    $sql_haslo = "";
+    $sql_baza = "blokada";
+    $mysqli = new mysqli($sql_serwer, $sql_login, $sql_haslo, $sql_baza);
 
-if ($mysqli->connect_error) {
-    die("Connection failed: " . $mysqli->connect_error);
-}
-
-$ip = getIp();
-// Usuwanie starych blokad, gdy minęło 20 minut:
- $mysqli->query("DELETE FROM uzytkownicy WHERE czas < DATE_SUB(NOW(), INTERVAL 20 MINUTE)");
-
-// Pobieranie rekordu dla danego numeru IP:
-$result = $mysqli->query("SELECT * FROM uzytkownicy WHERE ip='$ip'");
-
-if ($result && $result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    
-    // Jeżeli istnieje rekord, pobieram i sprawdzam licznik:
-    if ($row['licznik'] == 3) {
-        $blokada = true; // Gdy 3 logowania, to blokuję
-    } else {
-        $mysqli->query("UPDATE uzytkownicy SET liczba_log = liczba_log + 1, czas = NOW() WHERE ip='$ip'");
+    if ($mysqli->connect_error) {
+        die("Connection failed: " . $mysqli->connect_error);
     }
-} else {
-    // Jeżeli nie ma rekordu dla tego IP, zakładam go:
-    $mysqli->query("INSERT INTO uzytkownicy SET czas=NOW(), ip='$ip'");
-}
 
-$mysqli->close();
+    $ip = getIp();
+    // Usuwanie starych blokad, gdy minęło 20 minut:
+    $mysqli->query("DELETE FROM uzytkownicy WHERE czas < DATE_SUB(NOW(), INTERVAL 20 MINUTE)");
 
-if ($blokada) {
-    echo "Po trzech próbach dostęp został zawieszony na 20 minut";
-} else {
-    // Tutaj wykonuję kod, np. przetwarzam dane logowania
-    // lub wykonuję inne czynności, które mają nałożony limit uruchomień
-    echo "Przetworzenie danych z formularza logowania";
+    // Pobieranie rekordu dla danego numeru IP:
+    $result = $mysqli->query("SELECT * FROM uzytkownicy WHERE ip='$ip'");
+
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+
+
+        // Jeżeli istnieje rekord, pobieram i sprawdzam licznik:
+        if ($row['liczba_log'] >= 3) {
+            $blokada = true; // Gdy 3 logowania, to blokuję
+        } else {
+            $mysqli->query("UPDATE uzytkownicy SET liczba_log = liczba_log + 1, czas = NOW() WHERE ip='$ip'");
+        }
+    } else {
+        // Jeżeli nie ma rekordu dla tego IP, zakładam go:
+        $mysqli->query("INSERT INTO uzytkownicy SET czas=NOW(), ip='$ip'");
+    }
+
+    $mysqli->close();
+
+    return $blokada;
+    // return TRUE;
 }
 
 function getIp(): string
@@ -69,4 +68,3 @@ function getIp(): string
 
     return $ip;
 }
-?>
