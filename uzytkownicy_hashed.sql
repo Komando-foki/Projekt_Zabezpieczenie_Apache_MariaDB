@@ -43,16 +43,16 @@ CREATE TABLE `uzytkownicy` (
 --
 
 INSERT INTO `uzytkownicy` (`id`, `user`, `pass`, `email`, `drewno`, `kamien`, `zboze`, `dnipremium`) VALUES
-(1, 'adam', '21b1c114e9ade36af39a7e1724cb27e7', 'adam@gmail.com', 213, 5675, 342, 0),
-(2, 'marek', '22c64ca95223e15ff8fd69e3d82ea16d', 'marek@gmail.com', 324, 1123, 4325, 15),
-(3, 'anna', '9b910af3b405fb5fbcf56668911396e6', 'anna@gmail.com', 4536, 17, 120, 25),
-(4, 'andrzej', '22c64ca95223e15ff8fd69e3d82ea16d', 'andrzej@gmail.com', 5465, 132, 189, 0),
-(5, 'justyna', '536562e06134d516452b1b623d74e665', 'justyna@gmail.com', 245, 890, 554, 0),
-(6, 'kasia', 'cead7388dbbc1577f7f100369df61d7f', 'kasia@gmail.com', 267, 980, 109, 12),
-(7, 'beata', 'c56d1fdb23f0c76e83adc1fd5b27ae33', 'beata@gmail.com', 565, 356, 447, 77),
-(8, 'jakub', '9b593a92fdb9eed0d178ad3aa4e85b01', 'jakub@gmail.com', 2467, 557, 876, 0),
-(9, 'janusz', '8e2694c690083ca6db02c985149e7e84', 'janusz@gmail.com', 65, 456, 2467, 0),
-(10, 'roman', 'cac8c5833442092a1ffa09329ce1f54b', 'roman@gmail.com', 97, 226, 245, 23);
+(1, 'adam', '4RC42wz6JlNtyeRqijov1O32AHB8SlDt42iFqePZlNLC2/LokdF..', 'adam@gmail.com', 213, 5675, 342, 0),
+(2, 'marek', '0Ek4ln1bZvuITVjpHpBrNef1JbTVZFF85SGY78X/DgMSk/nkRl8Gi', 'marek@gmail.com', 324, 1123, 4325, 15),
+(3, 'anna', 'QwDnwdwUODQAHzx2Z0qZIeMzB1EK8ypDWsDsoHm/H7zdlQsX9pyVm', 'anna@gmail.com', 4536, 17, 120, 25),
+(4, 'andrzej', 'jXAberjjzIp1JPe7m53iKekKJzyVU0m2RTbL.FIutXeWd5re/h4By', 'andrzej@gmail.com', 5465, 132, 189, 0),
+(5, 'justyna', '.S6UoUNaP0OK7BYu7U/M2..UaWl9W8ejREh4gH75k6oqlVwJKuGLK', 'justyna@gmail.com', 245, 890, 554, 0),
+(6, 'kasia', 'irGge1gco.RD5IUuoQ4d6eNpShnCmQCq/U7kgpyU37OH6bA1oBVPi', 'kasia@gmail.com', 267, 980, 109, 12),
+(7, 'beata', 'GwIAxMxN5sKTZPWOGT9mSuqBHa3BFFIcUTdQ48Oi.abRwi5lRIlT.', 'beata@gmail.com', 565, 356, 447, 77),
+(8, 'jakub', 'c.nbRePgJGwDa9FSx7n15eStaiJG4QBEY1tMVJCO2TbXUEcCHA7L2', 'jakub@gmail.com', 2467, 557, 876, 0),
+(9, 'janusz', 'ZUJCBOx.pWLFSjXp8Fj36ugdb2LTJRzmuLqZ9D79V02mRhZuTk.BG', 'janusz@gmail.com', 65, 456, 2467, 0),
+(10, 'roman', '4t6K9.WcdKBQ2rHjqJ8tyemLCVLzqGa1Bvs5eVPAkp7SnXzf7tNNO', 'roman@gmail.com', 97, 226, 245, 23);
 
 --
 -- Indexes for dumped tables
